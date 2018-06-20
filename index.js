@@ -4,6 +4,7 @@ var os = require('os');
 var nodeStatic = require('node-static');
 var http = require('http');
 var socketIO = require('socket.io');
+const translate = require('google-translate-api');
 
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
@@ -24,6 +25,19 @@ io.sockets.on('connection', function(socket) {
     log('Client said: ', message);
     // for a real app, would be room-only (not broadcast)
     socket.broadcast.emit('message', message);
+  });
+
+  socket.on('test', function(message){
+    translate(message, {to: 'hi'}).then(res => {
+    console.log(res.text);
+    socket.emit('message', res.text, socket.id);
+    //=> I speak English
+    console.log(res.from.language.iso);
+    //=> nl
+}).catch(err => {
+    console.error(err);
+});
+    socket.emit('message', 'test message pritish', socket.id);
   });
 
   socket.on('create or join', function(room) {

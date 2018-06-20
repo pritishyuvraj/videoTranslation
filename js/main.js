@@ -64,6 +64,10 @@ function sendMessage(message) {
   socket.emit('message', message);
 }
 
+function privateMessage(message){
+  socket.emit('test', message);
+}
+
 // Speech to Text
 socket.on('speech', function(message){
   console.log("at right place" + message);
