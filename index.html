@@ -26,7 +26,7 @@
     <div class="app">
 
         <div class="input-single">
-              <textarea id="note-textarea" placeholder=" voice recognition." rows="6"></textarea>
+              <textarea id="note-textarea" placeholder=" voice recognition." rows="6" style="display:none"></textarea>
         </div>
         <div>
           <label> <small>Input language:</small>
@@ -35,6 +35,10 @@
         <br>
           <label> <small>Output language:</small>
             <input type="text" value="en" id="output_language" style="width: 20px" />
+          </label>
+          <br>
+          <label> <small>Voice of:</small>
+            <input type="text" value="8" id="voice_number" style="width: 20px" />
           </label>
           <br>
         <button id="start-record-btn" title="Start Recording">Start Recognition</button>

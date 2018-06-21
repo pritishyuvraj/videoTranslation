@@ -11,6 +11,8 @@ var output_lang_json;
 
 var input_language = $('#input_language');
 var output_language = $('#output_language');
+var voice_off = $('#voice_number');
+
 console.log("input langauge val: ", input_language);
 console.log("output langauge val: ", output_language);
 
@@ -463,8 +465,12 @@ notesList.on('click', function(e) {
 
 function readOutLoud(message) {
 	var speech = new SpeechSynthesisUtterance();
+  var voices = speechSynthesis.getVoices();
   // output langauge
   speech.lang = output_language.val();
+  // speech.voice = voices[voice_off.val()];
+  // speech.voice = default;
+  console.log("voice info ", speech.voice, voice_off.val());
   // speech.lang = 'hi';
   console.log("output lang -> ", speech.lang, output_language);
   // Set the text and voice attributes.
