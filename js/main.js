@@ -468,6 +468,11 @@ function readOutLoud(message) {
   var voices = speechSynthesis.getVoices();
   // output langauge
   speech.lang = output_language.val();
+  if(voice_off.val() != -1){
+    // English Male: 0
+    // English Female: 17
+    speech.voice = voices[voice_off.val()];
+  }
   // speech.voice = voices[voice_off.val()];
   // speech.voice = default;
   console.log("voice info ", speech.voice, voice_off.val());

@@ -14,8 +14,9 @@
   <h1>Machine Translation for Video Calls</h1>
 
   <div id="videos">
-    <video id="localVideo" autoplay muted playsinline></video>
-    <video id="remoteVideo" autoplay playsinline></video>
+    <video id="remoteVideo" style="width: 720px;" autoplay playsinline></video>
+    <video id="localVideo" style="width: 240px;" autoplay muted playsinline></video>
+
   </div>
 
   <p id="localText"></p>
@@ -38,7 +39,7 @@
           </label>
           <br>
           <label> <small>Voice of:</small>
-            <input type="text" value="8" id="voice_number" style="width: 20px" />
+            <input type="text" value="-1" id="voice_number" style="width: 20px" />
           </label>
           <br>
         <button id="start-record-btn" title="Start Recording">Start Recognition</button>
