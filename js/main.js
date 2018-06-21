@@ -8,6 +8,11 @@ var pc;
 var remoteStream;
 var turnReady;
 
+var input_language = $('#input_language');
+var output_language = $('#output_language');
+console.log("input langauge val: ", input_language);
+console.log("output langauge val: ", output_language);
+
 var pcConfig = {
   'iceServers': [{
     'urls': 'stun:stun.l.google.com:19302'
@@ -344,7 +349,8 @@ recognition.continuous = true;
 // This block is called every time the Speech APi captures a line.
 recognition.onresult = function(event) {
   console.log("current lang", recognition.lang);
-  recognition.lang = 'hi';
+  // input langauge
+  recognition.lang = input_language.val();
   console.log("current lang 2", recognition.lang);
   // event is a SpeechRecognitionEvent object.
   // It holds all the lines we have captured so far.
@@ -453,7 +459,10 @@ notesList.on('click', function(e) {
 
 function readOutLoud(message) {
 	var speech = new SpeechSynthesisUtterance();
-  speech.lang = 'hi';
+  // output langauge
+  speech.lang = output_language.val();
+  // speech.lang = 'hi';
+  console.log("output lang -> ", speech.lang, output_language);
   // Set the text and voice attributes.
 	speech.text = message;
 	speech.volume = 1;
@@ -517,5 +526,9 @@ function deleteNote(dateTime) {
 }
 
 /*-----------------------------
-    REST Call
+    Check current vals
 ------------------------------*/
+function see_vals(){
+  console.log("input langauge val: ", input_language);
+  console.log("output langauge val: ", output_language);
+}

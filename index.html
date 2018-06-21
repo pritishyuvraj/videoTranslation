@@ -18,8 +18,8 @@
     <video id="remoteVideo" autoplay playsinline></video>
   </div>
 
-  <p id="localText">My name is Pritish</p>
-  <p id="remoteText">Hi Pritish how are you?</p>
+  <p id="localText"></p>
+  <p id="remoteText"></p>
 
   <div class="container">
 
@@ -28,6 +28,15 @@
         <div class="input-single">
               <textarea id="note-textarea" placeholder=" voice recognition." rows="6"></textarea>
         </div>
+        <div>
+          <label> <small>Input language:</small>
+          <input type="text" value = "hi" id="input_language" style="width: 20px" />
+        </label>
+        <br>
+          <label> <small>Output language:</small>
+            <input type="text" value="en" id="output_language" style="width: 20px" />
+          </label>
+          <br>
         <button id="start-record-btn" title="Start Recording">Start Recognition</button>
         <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
         <!-- <button id="save-note-btn" title="Save Note">Save Note</button> -->
