@@ -4,7 +4,15 @@ var os = require('os');
 var nodeStatic = require('node-static');
 var http = require('http');
 var socketIO = require('socket.io');
-const translate = require('google-translate-api');
+const Translate = require('@google-cloud/translate');
+
+// Your Google Cloud Platform project ID
+const projectId = 'machine-translat-1529543671915';
+
+// Instantiates a client
+const translate = new Translate({
+  projectId: projectId,
+});
 
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
@@ -27,17 +35,32 @@ io.sockets.on('connection', function(socket) {
     socket.broadcast.emit('message', message);
   });
 
+  socket.on('send_to_server_raw', function(message){
+    console.log("server recieved raw message", message);
+    socket.broadcast.emit('to_client_raw', message);
+  });
+
   socket.on('test', function(message){
-    translate(message, {to: 'hi'}).then(res => {
-    console.log(res.text);
-    socket.emit('message', res.text, socket.id);
-    //=> I speak English
-    console.log(res.from.language.iso);
-    //=> nl
-}).catch(err => {
-    console.error(err);
-});
-    socket.emit('message', 'test message pritish', socket.id);
+    console.log("nothing wrong with the server");
+    // The text to translate
+    const text = 'Hello, world!';
+    // The target language
+    const target = 'hi';
+
+    // Translates some text into Russian
+    translate
+      .translate(text, target)
+      .then(results => {
+        const translation = results[0];
+
+        console.log(`Text: ${text}`);
+        console.log(`Translation: ${translation}`);
+        socket.emit('translated', translation);
+
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
   });
 
   socket.on('create or join', function(room) {
@@ -79,3 +102,24 @@ io.sockets.on('connection', function(socket) {
   });
 
 });
+
+
+// The text to translate
+const text = 'Hello, world!';
+// The target language
+const target = 'ru';
+
+// Translates some text into Russian
+translate
+  .translate(text, target)
+  .then(results => {
+    const translation = results[0];
+
+    console.log(`Text: ${text}`);
+    console.log(`Translation: ${translation}`);
+    console.log("Translation", translation);
+
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });

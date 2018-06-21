@@ -65,7 +65,13 @@ function sendMessage(message) {
 }
 
 function privateMessage(message){
+  console.log("sending in raw text for translation: ", message);
   socket.emit('test', message);
+}
+
+function rawSpeech(message){
+  console.log("sending raw speech: ", message);
+  socket.emit('send_to_server_raw', message);
 }
 
 // Speech to Text
@@ -97,10 +103,24 @@ socket.on('message', function(message) {
   }
   else{
     console.log("speech" + message);
-    readOutLoud(message);
+
   }
 });
 
+socket.on("to_client_raw", function(message){
+  console.log("client 2 recived raw message", message);
+  privateMessage(message);
+
+})
+socket.on('to_translate', function(messsage){
+  console.log("raw speech recieved", message);
+  privateMessage(message);
+});
+
+socket.on('translated', function(message){
+  readOutLoud(message);
+  console.log("see translated messsage" + message);
+});
 ////////////////////////////////////////////////////
 
 var localVideo = document.querySelector('#localVideo');
@@ -278,6 +298,7 @@ function stop() {
 
   // Text to Speech
 function readOutLoud(message) {
+  // speak
   var speech = new SpeechSynthesisUtterance();
 
   // Set the text and voice attributes.
@@ -322,7 +343,9 @@ recognition.continuous = true;
 
 // This block is called every time the Speech APi captures a line.
 recognition.onresult = function(event) {
-
+  console.log("current lang", recognition.lang);
+  recognition.lang = 'hi';
+  console.log("current lang 2", recognition.lang);
   // event is a SpeechRecognitionEvent object.
   // It holds all the lines we have captured so far.
   // We only need the current one.
@@ -331,7 +354,8 @@ recognition.onresult = function(event) {
   // Get a transcript of what was said.
   var transcript = event.results[current][0].transcript;
   // readOutLoud(transcript);
-  sendMessage(transcript);
+  // record
+  rawSpeech(transcript);
   // readOutLoud(conversion_text(transcript));
   // Add the current transcript to the contents of our Note.
   // There is a weird bug on mobile, where everything is repeated twice.
