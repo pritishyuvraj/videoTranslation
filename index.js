@@ -5,6 +5,7 @@ var nodeStatic = require('node-static');
 var http = require('http');
 var socketIO = require('socket.io');
 const Translate = require('@google-cloud/translate');
+var obj;
 
 // Your Google Cloud Platform project ID
 const projectId = 'machine-translat-1529543671915';
@@ -41,12 +42,14 @@ io.sockets.on('connection', function(socket) {
   });
 
   socket.on('test', function(message){
-    console.log("nothing wrong with the server");
+    obj = JSON.parse(message);
+    console.log("nothing wrong with the server", obj['lang'], obj['text']);
     // The text to translate
-    const text = 'Hello, world!';
+    // const text = 'Hello, world!';
+    var text = obj['text'];
     // The target language
-    const target = 'hi';
-
+    // const target = 'hi';
+    var target = obj['lang'];
     // Translates some text into Russian
     translate
       .translate(text, target)

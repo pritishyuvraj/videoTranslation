@@ -7,6 +7,7 @@ var localStream;
 var pc;
 var remoteStream;
 var turnReady;
+var output_lang_json;
 
 var input_language = $('#input_language');
 var output_language = $('#output_language');
@@ -71,7 +72,10 @@ function sendMessage(message) {
 
 function privateMessage(message){
   console.log("sending in raw text for translation: ", message);
-  socket.emit('test', message);
+  output_lang_json = `{"lang":$(output_language.val()), "text": $(message)}`;
+  output_lang_json = {'lang': output_language.val(), 'text': message};
+  output_lang_json = JSON.stringify(output_lang_json);
+  socket.emit('test', output_lang_json);
 }
 
 function rawSpeech(message){
