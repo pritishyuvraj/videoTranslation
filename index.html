@@ -14,8 +14,9 @@
   <h1>Machine Translation for Video Calls</h1>
 
   <div id="videos">
-    <video id="localVideo" autoplay muted playsinline></video>
-    <video id="remoteVideo" autoplay playsinline></video>
+
+    <video id="remoteVideo" style="width: 720px" autoplay playsinline></video>
+    <video id="localVideo" style="width: 320px" autoplay muted playsinline></video>
   </div>
 
   <p id="localText"></p>
@@ -26,7 +27,7 @@
     <div class="app">
 
         <div class="input-single">
-              <textarea id="note-textarea" placeholder=" voice recognition." rows="6"></textarea>
+              <textarea id="note-textarea" style="visibility:hidden" placeholder=" voice recognition." rows="6"></textarea>
         </div>
         <div>
           <label> <small>Input language:</small>
