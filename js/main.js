@@ -111,7 +111,7 @@ socket.on('message', function(message) {
     handleRemoteHangup();
   }
   else{
-    console.log("speech" + message);
+    console.log("message -> " + message);
 
   }
 });
@@ -128,7 +128,7 @@ socket.on('to_translate', function(messsage){
 
 socket.on('translated', function(message){
   readOutLoud(message);
-  console.log("see translated messsage" + message);
+  console.log("translated messsage ->" + message);
 });
 ////////////////////////////////////////////////////
 
@@ -535,4 +535,17 @@ function deleteNote(dateTime) {
 function see_vals(){
   console.log("input langauge val: ", input_language);
   console.log("output langauge val: ", output_language);
+}
+
+
+/*-----------------------------
+    On button press
+------------------------------*/
+
+function UserIsRecording(){
+  socket.emit('message', "User is speaking");
+}
+
+function UserStoppedRecording(){
+  socket.emit('message',"User stoppped speaking");
 }

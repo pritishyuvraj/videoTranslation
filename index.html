@@ -26,38 +26,43 @@
 
     <div class="app">
 
-        <div class="input-single">
-              <textarea id="note-textarea" style="visibility:hidden" placeholder=" voice recognition." rows="6"></textarea>
-        </div>
-        <div>
-          <label> <small>Input language:</small>
-          <input type="text" value = "hi" id="input_language" style="width: 20px" />
+      <div class="input-single">
+        <textarea id="note-textarea" style="visibility:hidden" placeholder=" voice recognition." rows="6"></textarea>
+      </div>
+      <div>
+        <label>
+          <small>Input language:</small>
+          <input type="text" value="hi" id="input_language" style="width: 20px" />
         </label>
         <br>
-          <label> <small>Output language:</small>
-            <input type="text" value="en" id="output_language" style="width: 20px" />
-          </label>
-          <br>
-        <button id="start-record-btn" title="Start Recording">Start Recognition</button>
-        <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
+        <label>
+          <small>Output language:</small>
+          <input type="text" value="en" id="output_language" style="width: 20px" />
+        </label>
+        <br>
+        <button id="start-record-btn" title="Start Recording" onclick="UserIsRecording()">
+          Start Recognition</button>
+        <button id="pause-record-btn" title="Pause Recording" onclick="UserStoppedRecording()">
+          Pause Recognition</button>
         <!-- <button id="save-note-btn" title="Save Note">Save Note</button> -->
-        <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+        <p id="recording-instructions">Press the
+          <strong>Start Recognition</strong> button and allow access.</p>
 
+
+      </div>
 
     </div>
 
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-  <!-- This file is automatically added/served when running "node index.js". -->
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-  <script src="js/main.js"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- This file is automatically added/served when running "node index.js". -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
 </body>
